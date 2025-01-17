@@ -14,7 +14,6 @@ import HotelPhotoGallery from 'components/HotelPhotoGallery/HotelPhotoGallery';
 import BookRoomCta from 'components/BookRoomCta/BookRoomCta';
 import toast from 'react-hot-toast';
 import { getStripe } from 'libs/stripe';
-import RoomReview from 'components/RoomReview/RoomReview';
 import React from 'react';
 
 const RoomDetails = (props: { params: Promise<{ slug: string }> }) => {
@@ -164,7 +163,7 @@ const RoomDetails = (props: { params: Promise<{ slug: string }> }) => {
                   <p className='md:text-lg font-semibold'>Customer Reviews</p>
                 </div>
                 <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
-                  <RoomReview roomId={room._id} />
+                  
                 </div>
               </div>
             </div>
