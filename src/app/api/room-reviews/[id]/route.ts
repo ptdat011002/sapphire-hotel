@@ -3,12 +3,12 @@ import { NextResponse } from 'next/server';
 
 export async function GET(
   req: Request,
-  { params }: { params: { id: string } }
+  context: { params: { id: string } }
 ) {
-  const roomId = params.id;
+  const { id } = context.params;
 
   try {
-    const roomReviews = await getRoomReviews(roomId);
+    const roomReviews = await getRoomReviews(id);
 
     return NextResponse.json(roomReviews, {
       status: 200,
