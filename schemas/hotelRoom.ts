@@ -137,12 +137,6 @@ const hotelRoom = {
       type: 'boolean',
       initialValue: false,
     }),
-    defineField({
-      name: 'reviews',
-      title: 'Reviews',
-      type: 'array',
-      of: [{ type: 'review' }],
-    }),
   ],
 };
 

@@ -66,21 +66,26 @@ const booking = {
       validation: Rule => Rule.required().min(0),
     }),
   ],
-  // Thêm phần này để định nghĩa cách hiển thị preview
   preview: {
     select: {
-      userName: 'user.name', // Lấy trường "name" từ tài liệu user
-      roomName: 'hotelRoom.name', // Lấy trường "name" từ tài liệu hotelRoom
+      user: 'user',  
+      hotelRoom: 'hotelRoom',  
       checkinDate: 'checkinDate',
     },
-    prepare(selection: { userName: any; roomName: any; checkinDate: any; }) {
-      const { userName, roomName, checkinDate } = selection;
+    prepare(selection: Record<string, any>) {  
+      const { user, hotelRoom, checkinDate } = selection;
+      const userName = user?.name || 'Unknown User';  
+      const roomName = hotelRoom?.name || 'Unknown Room';  
+  
       return {
-        title: `${userName || 'Unknown User'} - ${roomName || 'Unknown Room'}`,
-        subtitle: `Check-in: ${checkinDate || 'N/A'}`,
+        title: `${userName} - ${roomName}`,
+        subtitle: `Check-in: ${checkinDate ? new Date(checkinDate).toLocaleDateString() : 'N/A'}`,
       };
     },
   },
+  
+  
 };
+
 
 export default booking;
