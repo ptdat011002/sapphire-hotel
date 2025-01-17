@@ -68,21 +68,20 @@ const booking = {
   ],
   preview: {
     select: {
-      user: 'user',  
-      hotelRoom: 'hotelRoom',  
+      user: 'user.name',  // Lấy tên người dùng từ tham chiếu
+      hotelRoom: 'hotelRoom.name',  // Lấy tên phòng từ tham chiếu
       checkinDate: 'checkinDate',
     },
     prepare(selection: Record<string, any>) {  
       const { user, hotelRoom, checkinDate } = selection;
-      const userName = user?.name || 'Unknown User';  
-      const roomName = hotelRoom?.name || 'Unknown Room';  
-  
+      
       return {
-        title: `${userName} - ${roomName}`,
+        title: `${user || 'N/A'} - ${hotelRoom || 'N/A'}`,  // Kiểm tra nếu không có giá trị
         subtitle: `Check-in: ${checkinDate ? new Date(checkinDate).toLocaleDateString() : 'N/A'}`,
       };
     },
   },
+  
   
   
 };
