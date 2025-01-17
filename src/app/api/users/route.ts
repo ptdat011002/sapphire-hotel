@@ -8,7 +8,7 @@ import {
   updateReview,
 } from 'libs/apis';
 
-export async function GET(req: Request, res: Response) {
+export async function GET() {
   const session = await getServerSession(authOptions);
   if (!session) {
     return new NextResponse('Authentication Required', { status: 500 });
@@ -17,12 +17,12 @@ export async function GET(req: Request, res: Response) {
   try {
     const data = await getUserData(userId);
     return NextResponse.json(data, { status: 200, statusText: 'Successful' });
-  } catch (error) {
+  } catch {
     return new NextResponse('Unable to fetch', { status: 400 });
   }
 }
 
-export async function POST(req: Request, res: Response) {
+export async function POST(req: Request) {
   const session = await getServerSession(authOptions);
   if (!session) {
     return new NextResponse('Authentication Required', { status: 500 });
@@ -31,7 +31,7 @@ export async function POST(req: Request, res: Response) {
   if (!roomId || !reviewText || !ratingValue) {
     return new NextResponse('All fields are required', { status: 400 });
   }
- 
+
   const userId = session.user.id;
 
   try {
@@ -55,8 +55,12 @@ export async function POST(req: Request, res: Response) {
     }
 
     return NextResponse.json(data, { status: 200, statusText: 'Successful' });
-  } catch (error: any) {
-    console.log('Error Updating', error);
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      console.log('Error Updating:', error.message);
+    } else {
+      console.log('Error Updating:', error);
+    }
     return new NextResponse('Unable to create review', { status: 400 });
   }
 }

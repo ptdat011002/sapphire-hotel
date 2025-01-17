@@ -5,7 +5,7 @@ import { NextResponse } from 'next/server';
 import { getRoom } from 'libs/apis';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
-  apiVersion: '2024-04-10' as any,
+  apiVersion: '2024-11-20.acacia',
 });
 
 type RequestData = {
@@ -17,7 +17,7 @@ type RequestData = {
   hotelRoomSlug: string;
 };
 
-export async function POST(req: Request, res: Response) {
+export async function POST(req: Request) {
   const {
     checkinDate,
     adults,
@@ -89,8 +89,13 @@ export async function POST(req: Request, res: Response) {
       status: 200,
       statusText: 'Payment session created',
     });
-  } catch (error: any) {
-    console.log('Payment falied', error);
-    return new NextResponse(error, { status: 500 });
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      console.log('Payment failed:', error.message);
+      return new NextResponse(error.message, { status: 500 });
+    }
+  
+    console.log('Payment failed with unknown error');
+    return new NextResponse('Unknown error occurred', { status: 500 });
   }
 }

@@ -1,12 +1,9 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
 import "./globals.css";
 import { Poppins } from "next/font/google";
 import Header from "components/Header/Header";
 import Footer from "components/Footer/Footer";
 import ThemeProvider from "components/ThemeProvider/ThemeProvider";
-import Auth from "./auth/page";
-import Studio from "../(cms)/studio/[[...index]]/page";
 import { NextAuthProvider } from "components/AuthProvider/AuthProvider";
 import Toast from "components/Toast/Toast";
 const poppins = Poppins({
@@ -16,16 +13,6 @@ const poppins = Poppins({
   variable: "--font-poppins",
 });
 
-// const geistSans = localFont({
-//   src: "./fonts/GeistVF.woff",
-//   variable: "--font-geist-sans",
-//   weight: "100 900",
-// });
-// const geistMono = localFont({
-//   src: "./fonts/GeistMonoVF.woff",
-//   variable: "--font-geist-mono",
-//   weight: "100 900",
-// });
 
 export const metadata: Metadata = {
   title: "Hotel Management",

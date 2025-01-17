@@ -6,7 +6,7 @@ import Image from 'next/image';
 import axios from 'axios';
 import { signOut } from 'next-auth/react';
 import LoadingSpinner from '../../loading';
-import { use, useState } from 'react';
+import { useState } from 'react';
 import { BsJournalBookmarkFill } from 'react-icons/bs';
 import { GiMoneyStack } from 'react-icons/gi';
 import toast from 'react-hot-toast';
